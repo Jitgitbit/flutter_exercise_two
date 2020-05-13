@@ -5,7 +5,6 @@ Pixel 2 with Android Pie API 28 created
 
 flutter run
 
-remember why you chose flutter, cross-platform !!!, use this optimally
-
 R          ==>> restart in emulator!
-r          ==>> hot reload in emulator!
+
+intl: ^0.16.1

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:flutter_exercise_two/transaction.dart';
 
@@ -75,7 +76,7 @@ class MyHomePage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          transaction.date.toString(),           // in DART you can use toString() on any object !
+                          DateFormat.yMMMd().format(transaction.date),           
                           style: TextStyle(
                             color: Colors.grey
                           ),
