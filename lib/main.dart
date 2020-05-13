@@ -44,14 +44,27 @@ class MyHomePage extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     Container(
+                      margin: EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 15
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 2,
+                        )
+                      ),
+                      padding: EdgeInsets.all(10),
                       child: Text(
-                        transaction.amount.toString()
+                        transaction.amount.toString()                   // in DART you can use toString() on any object !
                       ),
                     ),
                     Column(
                       children: <Widget>[
                         Text(transaction.title),
-                        Text(transaction.date.toString()),
+                        Text(
+                          transaction.date.toString()
+                        ),
                       ],
                     )
                   ],
