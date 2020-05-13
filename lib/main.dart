@@ -56,7 +56,7 @@ class MyHomePage extends StatelessWidget {
                       ),
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        transaction.amount.toString(),                   // in DART you can use toString() on any object !
+                        '\$${transaction.amount}',                  
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -75,7 +75,7 @@ class MyHomePage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          transaction.date.toString(),
+                          transaction.date.toString(),           // in DART you can use toString() on any object !
                           style: TextStyle(
                             color: Colors.grey
                           ),
