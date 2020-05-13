@@ -50,13 +50,18 @@ class MyHomePage extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.black,
+                          color: Colors.purple,
                           width: 2,
                         )
                       ),
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        transaction.amount.toString()                   // in DART you can use toString() on any object !
+                        transaction.amount.toString(),                   // in DART you can use toString() on any object !
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.purple
+                        ),
                       ),
                     ),
                     Column(
