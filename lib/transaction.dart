@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class Transaction {
+class Transaction {                                       // a normal class/object ! NOT A WIDGET !
   final String id;
   final String title;
   final double amount;                       // f.e.:  9.99 euro !

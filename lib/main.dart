@@ -38,9 +38,12 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          Card(
-            color: Colors.red,
-            child: Text('LIST OF TX'),
+          Column(
+            children: transactions.map((transaction) {                 // <------ Watch out with arrow fn in DART !!!
+              return Card(
+                child: Text(transaction.title),
+              );
+            }).toList(),
           ),
         ],
       ),
