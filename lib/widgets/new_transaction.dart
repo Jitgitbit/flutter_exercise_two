@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   // String titleInput;
   // String amountInput;                                 // important ! inputs always have to be strings, so in case of number, it needs to be converted !!
-  final titleController = TextEditingController();
-  final amountController =
-      TextEditingController(); // this also a solution flutter likes in a stateless widget !
   final Function addTx;
 
   NewTransaction(this.addTx);
 
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amountController =
+      TextEditingController(); 
   void submitData() {
     final enteredTitle = titleController.text;
     final enteredAmount = double.parse(amountController.text);     // needs to be converted into a string, hence the .parse !
@@ -21,7 +27,7 @@ class NewTransaction extends StatelessWidget {
 
     if(enteredTitle.isEmpty || enteredAmount <= 0){ return; }              // This blank return stops the fn in it's tracks here, no addTx !!!
 
-    addTx(
+    widget.addTx(                                                    // thanks to this widget property we can use the fn coming from another class !!!
         enteredTitle,
         enteredAmount
     ); 
@@ -31,8 +37,7 @@ class NewTransaction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
-      child: Padding(
-        // Padding is a Container widget dedicated to add only a padding !
+      child: Padding(                                              // Padding is a Container widget dedicated to add only a padding !
         padding: EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
