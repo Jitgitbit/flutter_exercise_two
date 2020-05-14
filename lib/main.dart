@@ -21,6 +21,9 @@ class MyHomePage extends StatelessWidget {
     Transaction(id: 't2', title: 'new hat', amount: 39.99, date: DateTime.now(),),
   ];
 
+  String titleInput;
+  String amountInput;                                 // important ! inputs always have to be strings, so in case of number, it needs to be converted !!
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
