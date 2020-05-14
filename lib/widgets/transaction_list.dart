@@ -8,7 +8,7 @@ class TransactionList extends StatelessWidget {
 
   final List<Transaction> transactions;
 
-  TransactionList(this.transactions);                                // The Constructor ! transfering data from the parentWidget into a childWidget !!!
+  TransactionList(this.transactions);                                // The Constructor ! transfering data from the parentWidget into this childWidget !!!
 
   @override
   Widget build(BuildContext context) {
