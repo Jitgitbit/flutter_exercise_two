@@ -41,7 +41,7 @@ class NewTransaction extends StatelessWidget {
               decoration: InputDecoration(labelText: 'Title'),
               // onChanged: (value) => titleInput = value,                // note the two differnt syntax options and their requirements !
               controller: titleController,
-              onSubmitted: (_) => submitData, 
+              onSubmitted: (_) => submitData(), 
             ),
             TextField(
               decoration: InputDecoration(labelText: 'Amount'),
@@ -50,7 +50,7 @@ class NewTransaction extends StatelessWidget {
               // },
               controller: amountController,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => submitData,                                     // This is a convention "(_)", it means:"I get an argument, but I don't care, not used"
+              onSubmitted: (_) => submitData(),                                     // This is a convention "(_)", it means:"I get an argument, but I don't care, not used"
             ),                                                                   // Dart can be CORKY !!
             FlatButton(
               child: Text('Add Transaction'),
