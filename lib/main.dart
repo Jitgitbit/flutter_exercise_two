@@ -44,9 +44,19 @@ class MyHomePage extends StatelessWidget {
             child: Padding(                                    // Padding is a Container widget dedicated to add only a padding !
               padding: EdgeInsets.all(10),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  TextField(),
-                  TextField(),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Title'),
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Amount'),
+                  ),
+                  FlatButton(
+                    child: Text('Add Transaction'),
+                    textColor: Colors.purple,
+                    onPressed: () {}, 
+                  ),
                 ],
               ),
             ),
