@@ -29,7 +29,7 @@ class _UserTransactionsState extends State<UserTransactions> {
     final newTx = Transaction(title: txTitle, amount: txAmount, date: DateTime.now(), id: DateTime.now().toString());   // not ideal for id, but it is unique !!
 
     setState(() {
-      _userTransactions.add(newTx)
+      _userTransactions.add(newTx);
     });
   } 
 
@@ -37,7 +37,7 @@ class _UserTransactionsState extends State<UserTransactions> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        NewTransaction(),
+        NewTransaction(_addNewTransaction),
         TransactionList(_userTransactions),
       ],
     );

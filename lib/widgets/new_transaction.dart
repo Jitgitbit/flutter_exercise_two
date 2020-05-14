@@ -5,6 +5,9 @@ class NewTransaction extends StatelessWidget {
   // String amountInput;                                 // important ! inputs always have to be strings, so in case of number, it needs to be converted !!
   final titleController = TextEditingController();
   final amountController = TextEditingController();       // this also a solution flutter likes in a stateless widget !
+  final Function addTx; 
+
+  NewTransaction(this.addTx);
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +38,7 @@ class NewTransaction extends StatelessWidget {
                 print(titleController.text);                            // Different way of logging !!!!!! DART !!!
                 print('Here under is amountController.text');
                 print(amountController.text);
+                addTx(titleController.text, double.parse(amountController.text));     // needs to be converted into a string, hence the .parse !
               },
             ),
           ],
