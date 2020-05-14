@@ -33,7 +33,7 @@ class _NewTransactionState extends State<NewTransaction> {
     ); 
 
     Navigator.of(context).pop();        // --> this closes the top-most screen.  In this case it will close the modal sheet at submit !!!
-  }
+  }                                      // -> context here is made available because we extend State !!
 
   @override
   Widget build(BuildContext context) {
