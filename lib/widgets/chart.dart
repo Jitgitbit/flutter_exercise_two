@@ -29,7 +29,10 @@ class Chart extends StatelessWidget {
       print(DateFormat.E().format(weekDay));
       print('----> daily sum says what?');
       print(totalSum);
-      return {'day': DateFormat.E().format(weekDay), 'amount': totalSum};
+      return {
+        'day': DateFormat.E().format(weekDay).substring(0, 2),      // thx substring
+        'amount': totalSum
+      };
     });
   }
 
