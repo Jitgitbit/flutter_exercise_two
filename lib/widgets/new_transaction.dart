@@ -12,18 +12,18 @@ class NewTransaction extends StatefulWidget {
 }
 
 class _NewTransactionState extends State<NewTransaction> {
-  final titleController = TextEditingController();
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController(); 
+  DateTime _selectedDate;
 
-  final amountController =
-      TextEditingController(); 
-  void submitData() {
-    final enteredTitle = titleController.text;
-    final enteredAmount = double.parse(amountController.text);     // needs to be converted into a string, hence the .parse !
+  void _submitData() {
+    final enteredTitle = _titleController.text;
+    final enteredAmount = double.parse(_amountController.text);     // needs to be converted into a string, hence the .parse !
 
     print('Here under is titleController.text');
-    print(titleController.text);                        // Different way of logging !!!!!! DART !!!
+    print(_titleController.text);                        // Different way of logging !!!!!! DART !!!
     print('Here under is amountController.text');
-    print(amountController.text);
+    print(_amountController.text);
 
     if(enteredTitle.isEmpty || enteredAmount <= 0){ return; }              // This blank return stops the fn in it's tracks here, no addTx !!!
 
@@ -34,6 +34,21 @@ class _NewTransactionState extends State<NewTransaction> {
 
     Navigator.of(context).pop();        // --> this closes the top-most screen.  In this case it will close the modal sheet at submit !!!
   }                                      // -> context here is made available because we extend State !!
+
+  void _presentDatePicker(){
+    showDatePicker(
+      context: context, 
+      initialDate: DateTime.now(), 
+      firstDate: DateTime(2020), 
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if(pickedDate == null ){
+        return;
+      }
+      _selectedDate = pickedDate;
+    });
+    print('loading...');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,17 +62,17 @@ class _NewTransactionState extends State<NewTransaction> {
             TextField(
               decoration: InputDecoration(labelText: 'Title'),
               // onChanged: (value) => titleInput = value,                // note the two differnt syntax options and their requirements !
-              controller: titleController,
-              onSubmitted: (_) => submitData(), 
+              controller: _titleController,
+              onSubmitted: (_) => _submitData(), 
             ),
             TextField(
               decoration: InputDecoration(labelText: 'Amount'),
               // onChanged: (val) {
               //   amountInput = val;                                    // note the two differnt syntax options and their requirements !
               // },
-              controller: amountController,
+              controller: _amountController,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => submitData(),                                     // This is a convention "(_)", it means:"I get an argument, but I don't care, not used"
+              onSubmitted: (_) => _submitData(),                                     // This is a convention "(_)", it means:"I get an argument, but I don't care, not used"
             ),                                                                   // Dart can be CORKY !!
             Container(
               height: 70,
@@ -70,7 +85,7 @@ class _NewTransactionState extends State<NewTransaction> {
                       'Choose Date',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    onPressed: (){},
+                    onPressed: _presentDatePicker,
                   ),
                 ],
               ),
@@ -79,7 +94,7 @@ class _NewTransactionState extends State<NewTransaction> {
               child: Text('Add Transaction'),
               color: Theme.of(context).primaryColor,
               textColor: Theme.of(context).textTheme.button.color,
-              onPressed: submitData,
+              onPressed: _submitData,
             ),
           ],
         ),
