@@ -21,8 +21,10 @@ class MyHomePage extends StatelessWidget {
     Transaction(id: 't2', title: 'new hat', amount: 39.99, date: DateTime.now(),),
   ];
 
-  String titleInput;
-  String amountInput;                                 // important ! inputs always have to be strings, so in case of number, it needs to be converted !!
+  // String titleInput;
+  // String amountInput;                                 // important ! inputs always have to be strings, so in case of number, it needs to be converted !!
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,22 +53,24 @@ class MyHomePage extends StatelessWidget {
                 children: <Widget>[
                   TextField(
                     decoration: InputDecoration(labelText: 'Title'),
-                    onChanged: (value) => titleInput = value,                // note the two differnt syntax options and their requirements !
+                    // onChanged: (value) => titleInput = value,                // note the two differnt syntax options and their requirements !
+                    controller: titleController,
                   ),
                   TextField(
                     decoration: InputDecoration(labelText: 'Amount'),
-                    onChanged: (val) {
-                      amountInput = val;                                    // note the two differnt syntax options and their requirements !
-                    } ,
+                    // onChanged: (val) {
+                    //   amountInput = val;                                    // note the two differnt syntax options and their requirements !
+                    // },
+                    controller: amountController,
                   ),
                   FlatButton(
                     child: Text('Add Transaction'),
                     textColor: Colors.purple,
                     onPressed: () {
-                      print('Here under is titleInput');
-                      print(titleInput);                                    // Different way of logging !!!!!! DART !!!
-                      print('Here under is amountInput');
-                      print(amountInput);
+                      print('Here under is titleController.text');
+                      print(titleController.text);                                    // Different way of logging !!!!!! DART !!!
+                      print('Here under is amountController.text');
+                      print(amountController.text);
                     }, 
                   ),
                 ],
