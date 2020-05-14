@@ -31,6 +31,8 @@ class _NewTransactionState extends State<NewTransaction> {
         enteredTitle,
         enteredAmount
     ); 
+
+    Navigator.of(context).pop();        // --> this closes the top-most screen.  In this case it will close the modal sheet at submit !!!
   }
 
   @override
