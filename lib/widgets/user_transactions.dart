@@ -30,7 +30,7 @@ class _UserTransactionsState extends State<UserTransactions> {
     return Column(
       children: <Widget>[
         NewTransaction(),
-        TransactionList(),
+        TransactionList(_userTransactions),
       ],
     );
   }
