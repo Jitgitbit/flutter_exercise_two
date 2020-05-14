@@ -64,7 +64,7 @@ class MyHomePage extends StatelessWidget {
                     textColor: Colors.purple,
                     onPressed: () {
                       print('Here under is titleInput');
-                      print(titleInput);                                    // Different way of logging !!!!!!
+                      print(titleInput);                                    // Different way of logging !!!!!! DART !!!
                       print('Here under is amountInput');
                       print(amountInput);
                     }, 
