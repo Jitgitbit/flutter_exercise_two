@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:flutter_exercise_two/transaction.dart';
+import './models/transaction.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,7 +24,7 @@ class MyHomePage extends StatelessWidget {
   // String titleInput;
   // String amountInput;                                 // important ! inputs always have to be strings, so in case of number, it needs to be converted !!
   final titleController = TextEditingController();
-  final amountController = TextEditingController();
+  final amountController = TextEditingController();       // this also a solution flutter likes in a stateless widget !
 
   @override
   Widget build(BuildContext context) {
