@@ -13,10 +13,10 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      child: ListView.builder(                              
-        itemBuilder: (context, index) {
-          return Card(
-            child: Row(
+      child: ListView.builder(                              // Using the .builder() is of CRUCIAL importance to keep a good performance    !!!!!
+        itemBuilder: (context, index) {                    // (ctx refers to context, which is meta-data that informs about relative position) !
+          return Card(                                    // Thanks to .builder() it only loads what is visible, instead of the entire list !!!!!
+            child: Row(                                  // So obviously with long lists, this saves a lot of data being transferred !!!!!
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
