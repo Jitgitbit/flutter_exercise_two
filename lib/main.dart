@@ -49,7 +49,11 @@ class _MyHomePageState extends State<MyHomePage> {
   } 
   void _startAddNewTransaction(BuildContext ctx){
     showModalBottomSheet(context: ctx, builder: (bCtx){
-      return NewTransaction(_addNewTransaction);
+      return GestureDetector(
+        onTap: (){},                                            // safety to prevent modal to close when sheet itself is tapped
+        behavior: HitTestBehavior.opaque,
+        child: NewTransaction(_addNewTransaction),
+      );
     });
   }
 
