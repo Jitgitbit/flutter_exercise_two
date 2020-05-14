@@ -28,12 +28,12 @@ class TransactionList extends StatelessWidget {
                       'assets/images/waiting.png',
                       fit: BoxFit.cover,
                     )),
-              ],
-            )
-          : ListView.builder(                         // Using the .builder() is of CRUCIAL importance to keep a good performance    !!!!!
-              itemBuilder: (ctx, index) {            // (ctx refers to context, which is meta-data that informs about relative position) !
-                return Card(                        // Thanks to .builder() it only loads what is visible, instead of the entire list !!!!!
-                  child: Row(                      // So obviously with long lists, this saves a lot of data being transferred !!!!!
+              ],                                          // Using the .builder() is of CRUCIAL importance to keep a good performance    !!!!!
+            )                                            // (ctx refers to context, which is meta-data that informs about relative position) !
+          : ListView.builder(                           // Thanks to .builder() it only loads what is visible, instead of the entire list !!!!!
+              itemBuilder: (ctx, index) {              // So obviously with long lists, this saves a lot of data being transferred !!!!!
+                return Card(                       
+                  child: Row(                     
                     children: <Widget>[
                       Container(
                         margin:
