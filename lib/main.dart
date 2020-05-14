@@ -51,9 +51,7 @@ class MyHomePage extends StatelessWidget {
                 children: <Widget>[
                   TextField(
                     decoration: InputDecoration(labelText: 'Title'),
-                    onChanged: (value) => {
-                      titleInput = value                                    // note the two differnt syntax options and their requirements !
-                    },
+                    onChanged: (value) => titleInput = value,                // note the two differnt syntax options and their requirements !
                   ),
                   TextField(
                     decoration: InputDecoration(labelText: 'Amount'),
