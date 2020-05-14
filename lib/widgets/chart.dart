@@ -31,7 +31,7 @@ class Chart extends StatelessWidget {
       print('----> daily sum says what?');
       print(totalSum);
       return {
-        'day': DateFormat.E().format(weekDay).substring(0, 2),      // thx substring
+        'day': DateFormat.E().format(weekDay).substring(0, 1),      // thx substring
         'amount': totalSum
       };
     });
@@ -50,15 +50,22 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
-      child: Row(
-        children: groupedTransactionValues.map((data){
-          // return Text('${data['day']}: ${data['amount']}');
-          return ChartBar(
-            data['day'], 
-            data['amount'], 
-            totalSpending == 0.0 ? 0.0 : (data['amount'] as double) / totalSpending           // this ternary prevents crash in case of no data !!!
-          );
-        }).toList(),
+      child: Padding(                                           // Padding, the specialized Container, only to be used in case all you need is padding !
+        padding: EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransactionValues.map((data){
+            // return Text('${data['day']}: ${data['amount']}');
+            return Flexible(
+              fit: FlexFit.tight,                                     // force the child to use it's available space
+              child: ChartBar(
+                data['day'], 
+                data['amount'], 
+                totalSpending == 0.0 ? 0.0 : (data['amount'] as double) / totalSpending           // this ternary prevents crash in case of no data !!!
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }

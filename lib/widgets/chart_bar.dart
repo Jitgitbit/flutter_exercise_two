@@ -12,7 +12,9 @@ class ChartBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Text('\$${spendingAmount.toStringAsFixed(0)}'),      // to round off the decimals
+        FittedBox(                                                     // forces it's child into the available space, even shrinks the text !
+          child: Text('\$${spendingAmount.toStringAsFixed(0)}')                  // to round off the decimals
+        ),                                                
         SizedBox(height: 4),
         Container(
           height:  60,
