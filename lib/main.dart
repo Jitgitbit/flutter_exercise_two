@@ -51,9 +51,15 @@ class MyHomePage extends StatelessWidget {
                 children: <Widget>[
                   TextField(
                     decoration: InputDecoration(labelText: 'Title'),
+                    onChanged: (value) => {
+                      titleInput = value                                    // note the two differnt syntax options and their requirements !
+                    },
                   ),
                   TextField(
                     decoration: InputDecoration(labelText: 'Amount'),
+                    onChanged: (val) {
+                      amountInput = val;                                    // note the two differnt syntax options and their requirements !
+                    } ,
                   ),
                   FlatButton(
                     child: Text('Add Transaction'),
