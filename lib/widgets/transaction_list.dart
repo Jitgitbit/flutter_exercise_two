@@ -32,7 +32,31 @@ class TransactionList extends StatelessWidget {
             )                                            // (ctx refers to context, which is meta-data that informs about relative position) !
           : ListView.builder(                           // Thanks to .builder() it only loads what is visible, instead of the entire list !!!!!
               itemBuilder: (ctx, index) {              // So obviously with long lists, this saves a lot of data being transferred !!!!!
-                return ListTile();
+                return Card(
+                  elevation: 5,
+                  margin: EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 5,
+                  ),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                        padding: EdgeInsets.all(6),
+                        child: FittedBox(
+                          child: Text('\$${transactions[index].amount}'),
+                        ),
+                      ),
+                    ),
+                    title: Text(
+                      transactions[index].title,
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                    subtitle: Text(
+                      DateFormat.yMMMd().format(transactions[index].date),
+                    ),
+                  ),
+                );
               },
               itemCount: transactions.length,
             ),
