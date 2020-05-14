@@ -11,13 +11,19 @@ class NewTransaction extends StatelessWidget {
   NewTransaction(this.addTx);
 
   void submitData() {
+    final enteredTitle = titleController.text;
+    final enteredAmount = double.parse(amountController.text);     // needs to be converted into a string, hence the .parse !
+
     print('Here under is titleController.text');
     print(titleController.text);                        // Different way of logging !!!!!! DART !!!
     print('Here under is amountController.text');
     print(amountController.text);
+
+    if(enteredTitle.isEmpty || enteredAmount <= 0){ return; }              // This blank return stops the fn in it's tracks here, no addTx !!!
+
     addTx(
-        titleController.text,
-        double.parse(amountController.text)  // needs to be converted into a string, hence the .parse !
+        enteredTitle,
+        enteredAmount
     ); 
   }
 
@@ -35,6 +41,7 @@ class NewTransaction extends StatelessWidget {
               decoration: InputDecoration(labelText: 'Title'),
               // onChanged: (value) => titleInput = value,                // note the two differnt syntax options and their requirements !
               controller: titleController,
+              onSubmitted: (_) => submitData, 
             ),
             TextField(
               decoration: InputDecoration(labelText: 'Amount'),
@@ -48,9 +55,7 @@ class NewTransaction extends StatelessWidget {
             FlatButton(
               child: Text('Add Transaction'),
               textColor: Colors.purple,
-              onPressed: () {
-                submitData();
-              },
+              onPressed: submitData,
             ),
           ],
         ),
