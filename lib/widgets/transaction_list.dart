@@ -27,7 +27,7 @@ class TransactionList extends StatelessWidget {
                   )),
                   padding: EdgeInsets.all(10),
                   child: Text(
-                    '\$${transactions[index].amount.toStringAsFixed(2)}',
+                    '\$${transactions[index].amount.toStringAsFixed(2)}',           // two decimals, always
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
