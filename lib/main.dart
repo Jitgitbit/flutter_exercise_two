@@ -62,7 +62,12 @@ class MyHomePage extends StatelessWidget {
                   FlatButton(
                     child: Text('Add Transaction'),
                     textColor: Colors.purple,
-                    onPressed: () {}, 
+                    onPressed: () {
+                      print('Here under is titleInput');
+                      print(titleInput);                                    // Different way of logging !!!!!!
+                      print('Here under is amountInput');
+                      print(amountInput);
+                    }, 
                   ),
                 ],
               ),
