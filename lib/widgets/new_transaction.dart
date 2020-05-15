@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 
 class NewTransaction extends StatefulWidget {
   // String titleInput;
@@ -45,7 +47,9 @@ class _NewTransactionState extends State<NewTransaction> {
       if(pickedDate == null ){
         return;
       }
-      _selectedDate = pickedDate;
+      setState(() {
+        _selectedDate = pickedDate;
+      });
     });
     print('loading...');
   }
@@ -73,12 +77,18 @@ class _NewTransactionState extends State<NewTransaction> {
               controller: _amountController,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               onSubmitted: (_) => _submitData(),                                     // This is a convention "(_)", it means:"I get an argument, but I don't care, not used"
-            ),                                                                   // Dart can be CORKY !!
+            ),                                                                      // Dart can be CORKY !!
             Container(
               height: 70,
               child: Row(
                 children: <Widget>[
-                  Text('No Date Chosen!'),
+                  Expanded(                                                    // with Expanded it will only take as much space as it needs
+                    child: Text(
+                      _selectedDate == null
+                      ? 'No Date Chosen!'
+                      : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
+                    ),
+                  ),
                   FlatButton(
                     textColor: Theme.of(context).primaryColor,
                     child: Text(
