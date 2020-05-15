@@ -15,8 +15,9 @@ class MyApp extends StatelessWidget {
       title: 'Phoenix Expenses App',
       theme: ThemeData(
         primarySwatch: Colors.purple,
-        accentColor: Colors.amber,
-        errorColor: Color.fromRGBO(139, 0, 0, 1),
+        // accentColor: Colors.amber,
+        accentColor: Color.fromRGBO(139, 0, 0, 1),
+        errorColor: Colors.amber,
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(         
           title: TextStyle(
@@ -104,6 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).accentColor,
         title: Text('Phoenix Expenses App'),
         actions: <Widget>[
           IconButton(

@@ -49,6 +49,7 @@ class Chart extends StatelessWidget {
     print(groupedTransactionValues);
     return Card(
       elevation: 6,
+      shadowColor: Theme.of(context).primaryColor,
       margin: EdgeInsets.all(20),
       child: Padding(                                           // Padding, the specialized Container, only to be used in case all you need is padding !
         padding: EdgeInsets.all(10),
