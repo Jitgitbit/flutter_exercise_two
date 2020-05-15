@@ -19,6 +19,9 @@ class _NewTransactionState extends State<NewTransaction> {
   DateTime _selectedDate;
 
   void _submitData() {
+    if(_amountController.text.isEmpty){
+      return;
+    }
     final enteredTitle = _titleController.text;
     final enteredAmount = double.parse(_amountController.text);     // needs to be converted into a string, hence the .parse !
 
@@ -27,11 +30,14 @@ class _NewTransactionState extends State<NewTransaction> {
     print('Here under is amountController.text');
     print(_amountController.text);
 
-    if(enteredTitle.isEmpty || enteredAmount <= 0){ return; }              // This blank return stops the fn in it's tracks here, no addTx !!!
+    if(enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null){
+      return;                                                                     // This blank return stops the fn in it's tracks here, no addTx !!!
+    }              
 
     widget.addTx(                                                    // thanks to this widget property we can use the fn coming from another class !!!
         enteredTitle,
-        enteredAmount
+        enteredAmount,
+        _selectedDate
     ); 
 
     Navigator.of(context).pop();        // --> this closes the top-most screen.  In this case it will close the modal sheet at submit !!!
