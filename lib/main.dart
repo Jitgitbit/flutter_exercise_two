@@ -114,6 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
     final appBarVar = AppBar(
         backgroundColor: Theme.of(context).accentColor,
         title: Text('Phoenix Expenses App'),
@@ -131,8 +132,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            if(isLandscape)Row(                                   // !!! DO NOT USE {} AFTER THIS IF STATEMENT, 
+              mainAxisAlignment: MainAxisAlignment.center,       // IT'S A SPECIAL "IF INSIDE OF A LIST" SYNTAX IN DART !!!
               children: <Widget>[
                 Text('Show Chart'),
                 Switch(value: _showChart, onChanged: (val){
