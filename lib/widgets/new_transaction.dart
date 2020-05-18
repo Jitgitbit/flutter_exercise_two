@@ -88,8 +88,8 @@ class _NewTransactionState extends State<NewTransaction> {
                 // },
                 controller: _amountController,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
-                onSubmitted: (_) => _submitData(),                                     // This is a convention "(_)", it means:"I get an argument, but I don't care, not used"
-              ),                                                                      // Dart can be CORKY !!
+                onSubmitted: (_) => _submitData(),                              // This is a convention "(_)", it means:"I get an argument, but I don't care, not used"
+              ),                                                               // Dart can be CORKY !!
               Container(
                 height: 70,
                 child: Row(
