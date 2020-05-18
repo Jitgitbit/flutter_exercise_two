@@ -114,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+
     final appBarVar = AppBar(
         backgroundColor: Theme.of(context).accentColor,
         title: Text('Phoenix Expenses App'),
@@ -125,6 +125,18 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       );
+
+    final txListWidget = Container(                                                   
+                  height: (
+                    MediaQuery.of(context).size.height 
+                    - appBarVar.preferredSize.height                                  //---> this represents the space taken by the appBar !
+                    - MediaQuery.of(context).padding.top                             //----> this represents the space taken by the statusBar !
+                  ) * 0.7,                                                          //-----> finally responsiveness! 0.7 is ratio to 1, 70% !
+                  child: TransactionList(_userTransactions, _deleteTransaction)
+                );
+
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+
     return Scaffold(
       appBar: appBarVar,
       body: SingleChildScrollView(
@@ -132,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            if(isLandscape)Row(                                   // !!! DO NOT USE {} AFTER THIS IF STATEMENT, 
+            if(isLandscape)Row(                             //**  // !!! DO NOT USE {} AFTER THIS IF STATEMENT, check ** 
               mainAxisAlignment: MainAxisAlignment.center,       // IT'S A SPECIAL "IF INSIDE OF A LIST" SYNTAX IN DART !!!
               children: <Widget>[
                 Text('Show Chart'),
@@ -143,23 +155,25 @@ class _MyHomePageState extends State<MyHomePage> {
                 }),
               ],
             ),
-            _showChart
-              ? Container(
+            if(!isLandscape)Container(              //**               //===>> THE WHOLE SCREEN IS TAKEN INTO ACCOUNT NOW !
                   height: (
                     MediaQuery.of(context).size.height 
-                    - appBarVar.preferredSize.height                //---> this represents the space taken by the appBar !
-                    - MediaQuery.of(context).padding.top           //----> this represents the space taken by the statusBar !
-                  ) * 0.7,                                        //-----> finally responsiveness! 0.4 is ratio to 1, 40% !
+                    - appBarVar.preferredSize.height                //---> again this represents the space taken by the appBar !
+                    - MediaQuery.of(context).padding.top           //----> again this represents the space taken by the statusBar !
+                  ) * 0.3,                                        //-----> finally responsiveness! 0.3 is ratio to 1, 30% !
+                  child: Chart(_recentTransactions)
+                ),
+            if(!isLandscape)txListWidget,                        //**
+            if(isLandscape)_showChart                           //**
+              ? Container(                                            //===>> THE WHOLE SCREEN IS TAKEN INTO ACCOUNT NOW !
+                  height: (
+                    MediaQuery.of(context).size.height 
+                    - appBarVar.preferredSize.height                //---> again this represents the space taken by the appBar !
+                    - MediaQuery.of(context).padding.top           //----> again this represents the space taken by the statusBar !
+                  ) * 0.7,                                        //-----> finally responsiveness! 0.7 is ratio to 1, 70% !
                   child: Chart(_recentTransactions)
                 )
-              : Container(                                                   //===>> THE WHOLE SCREEN IS TAKEN INTO ACCOUNT NOW !
-                  height: (
-                    MediaQuery.of(context).size.height 
-                    - appBarVar.preferredSize.height                                  //---> again this represents the space taken by the appBar !
-                    - MediaQuery.of(context).padding.top                             //----> again this represents the space taken by the statusBar !
-                  ) * 0.7,                                                          //-----> finally responsiveness! 0.6 is ratio to 1, 60% !
-                  child: TransactionList(_userTransactions, _deleteTransaction)
-                ),
+              : txListWidget
           ],
         ),
       ),
