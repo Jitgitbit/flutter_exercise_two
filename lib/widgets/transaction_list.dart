@@ -11,9 +11,7 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 450,                                              // 450 looks great on Pixel 2, but this has to be dynamic at some point, responsive !
-      child: transactions.isEmpty
+    return transactions.isEmpty
           ? Column(
               children: <Widget>[
                 Text(
@@ -68,7 +66,6 @@ class TransactionList extends StatelessWidget {
                 );
               },
               itemCount: transactions.length,
-            ),
-    );
+            );
   }
 }

@@ -104,9 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
+    final appBarVar = AppBar(
+        backgroundColor: Theme.of(context).accentColor,
         title: Text('Phoenix Expenses App'),
         actions: <Widget>[
           IconButton(
@@ -114,14 +113,30 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () => _startAddNewTransaction(context),
           ),
         ],
-      ),
+      );
+    return Scaffold(
+      appBar: appBarVar,
       body: SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Chart(_recentTransactions),
-            TransactionList(_userTransactions, _deleteTransaction),
+            Container(
+              height: (
+                MediaQuery.of(context).size.height 
+                - appBarVar.preferredSize.height                //---> this represents the space taken by the appBar !
+                - MediaQuery.of(context).padding.top           //----> this represents the space taken by the statusBar !
+              ) * 0.4,                                        //-----> finally responsiveness! 0.4 is ratio to 1, 40% !
+              child: Chart(_recentTransactions)
+            ),
+            Container(                                                   //===>> THE WHOLE SCREEN IS TAKEN INTO ACCOUNT NOW !
+              height: (
+                MediaQuery.of(context).size.height 
+                - appBarVar.preferredSize.height                                  //---> again this represents the space taken by the appBar !
+                - MediaQuery.of(context).padding.top                             //----> again this represents the space taken by the statusBar !
+              ) * 0.6,                                                          //-----> finally responsiveness! 0.6 is ratio to 1, 60% !
+              child: TransactionList(_userTransactions, _deleteTransaction)
+            ),
           ],
         ),
       ),
