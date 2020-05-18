@@ -62,57 +62,64 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(                                              // Padding is a Container widget dedicated to add only a padding !
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            TextField(
-              decoration: InputDecoration(labelText: 'Title'),
-              // onChanged: (value) => titleInput = value,                // note the two differnt syntax options and their requirements !
-              controller: _titleController,
-              onSubmitted: (_) => _submitData(), 
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: 'Amount'),
-              // onChanged: (val) {
-              //   amountInput = val;                                    // note the two differnt syntax options and their requirements !
-              // },
-              controller: _amountController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => _submitData(),                                     // This is a convention "(_)", it means:"I get an argument, but I don't care, not used"
-            ),                                                                      // Dart can be CORKY !!
-            Container(
-              height: 70,
-              child: Row(
-                children: <Widget>[
-                  Expanded(                                                    // with Expanded it will only take as much space as it needs
-                    child: Text(
-                      _selectedDate == null
-                      ? 'No Date Chosen!'
-                      : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
-                    ),
-                  ),
-                  FlatButton(
-                    textColor: Theme.of(context).primaryColor,
-                    child: Text(
-                      'Choose Date',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    onPressed: _presentDatePicker,
-                  ),
-                ],
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Padding(                                              // Padding is a Container widget dedicated to add only a padding !
+          padding: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(labelText: 'Title'),
+                // onChanged: (value) => titleInput = value,                // note the two differnt syntax options and their requirements !
+                controller: _titleController,
+                onSubmitted: (_) => _submitData(), 
               ),
-            ),
-            RaisedButton(
-              child: Text('Add Transaction'),
-              color: Theme.of(context).primaryColor,
-              textColor: Theme.of(context).textTheme.button.color,
-              onPressed: _submitData,
-            ),
-          ],
+              TextField(
+                decoration: InputDecoration(labelText: 'Amount'),
+                // onChanged: (val) {
+                //   amountInput = val;                                    // note the two differnt syntax options and their requirements !
+                // },
+                controller: _amountController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                onSubmitted: (_) => _submitData(),                                     // This is a convention "(_)", it means:"I get an argument, but I don't care, not used"
+              ),                                                                      // Dart can be CORKY !!
+              Container(
+                height: 70,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(                                                    // with Expanded it will only take as much space as it needs
+                      child: Text(
+                        _selectedDate == null
+                        ? 'No Date Chosen!'
+                        : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
+                      ),
+                    ),
+                    FlatButton(
+                      textColor: Theme.of(context).primaryColor,
+                      child: Text(
+                        'Choose Date',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: _presentDatePicker,
+                    ),
+                  ],
+                ),
+              ),
+              RaisedButton(
+                child: Text('Add Transaction'),
+                color: Theme.of(context).primaryColor,
+                textColor: Theme.of(context).textTheme.button.color,
+                onPressed: _submitData,
+              ),
+            ],
+          ),
         ),
       ),
     );
