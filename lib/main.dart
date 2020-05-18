@@ -142,6 +142,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         );
 
+    print(appBarVar.preferredSize.height);
+
     final txListWidget = Container(                                                   
                   height: (
                     MediaQuery.of(context).size.height 
@@ -153,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
 
-    final pageBody = SingleChildScrollView(
+    final pageBody = SafeArea(child: SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -193,7 +195,8 @@ class _MyHomePageState extends State<MyHomePage> {
               : txListWidget
           ],
         ),
-      );
+      ),
+    );
 
     return Platform.isIOS ? CupertinoPageScaffold(child: pageBody, navigationBar: appBarVar,) : Scaffold(
       appBar: appBarVar,
