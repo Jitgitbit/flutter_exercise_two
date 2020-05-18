@@ -12,7 +12,8 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return transactions.isEmpty
-          ? Column(
+          ? LayoutBuilder(builder: (ctx, constraints){
+            return Column(
               children: <Widget>[
                 Text(
                   'No transactions added yet!',
@@ -22,14 +23,16 @@ class TransactionList extends StatelessWidget {
                   height: 25,
                 ),
                 Container(
-                    height: 200,
+                    height: constraints.maxHeight * 0.6,
                     child: Image.asset(
                       'assets/images/waiting.png',
                       fit: BoxFit.cover,
-                    )),
-              ],                                          // Using the .builder() is of CRUCIAL importance to keep a good performance    !!!!!
-            )                                            // (ctx refers to context, which is meta-data that informs about relative position) !
-          : ListView.builder(                           // Thanks to .builder() it only loads what is visible, instead of the entire list !!!!!
+                    )
+                  ),
+                ],                                          
+              );                                            // Using the ListView.builder() is of CRUCIAL importance to keep a good performance !!!!!
+            })                                             // (ctx refers to context, which is meta-data that informs about relative position) !
+          : ListView.builder(                           // Thanks to ListView.builder() it only loads what is visible, instead of the entire list !!!!!
               itemBuilder: (ctx, index) {              // So obviously with long lists, this saves a lot of data being transferred !!!!!
                 return Card(
                   // shadowColor: Theme.of(context).primaryColor,
