@@ -34,7 +34,7 @@ class TransactionList extends StatelessWidget {
           : ListView.builder(                           // Thanks to .builder() it only loads what is visible, instead of the entire list !!!!!
               itemBuilder: (ctx, index) {              // So obviously with long lists, this saves a lot of data being transferred !!!!!
                 return Card(
-                  shadowColor: Theme.of(context).primaryColor,
+                  // shadowColor: Theme.of(context).primaryColor,
                   elevation: 5,
                   margin: EdgeInsets.symmetric(
                     vertical: 8,
