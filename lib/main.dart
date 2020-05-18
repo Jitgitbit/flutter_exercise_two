@@ -163,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
             if(isLandscape)Row(                             //**  // !!! DO NOT USE {} AFTER THIS IF STATEMENT, check ** 
               mainAxisAlignment: MainAxisAlignment.center,       // IT'S A SPECIAL "IF INSIDE OF A LIST" SYNTAX IN DART !!!
               children: <Widget>[
-                Text('Show Chart'),
+                Text('Show Chart', style: Theme.of(context).textTheme.title,),
                 Switch.adaptive(
                   activeColor: Theme.of(context).accentColor,
                   value: _showChart, 
