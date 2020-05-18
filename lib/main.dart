@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -117,16 +118,29 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    final appBarVar = AppBar(
-        backgroundColor: Theme.of(context).accentColor,
-        title: Text('Phoenix Expenses App'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add), 
-            onPressed: () => _startAddNewTransaction(context),
+    final PreferredSizeWidget appBarVar = Platform.isIOS 
+      ? CupertinoNavigationBar(
+          middle: Text('Phoenix Expenses App'),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              GestureDetector(
+                child: Icon(CupertinoIcons.add),
+                onTap: () => _startAddNewTransaction(context),
+              ),
+            ],
           ),
-        ],
-      );
+      ) 
+      : AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
+          title: Text('Phoenix Expenses App'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add), 
+              onPressed: () => _startAddNewTransaction(context),
+            ),
+          ],
+        );
 
     final txListWidget = Container(                                                   
                   height: (
@@ -139,9 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
 
-    return Scaffold(
-      appBar: appBarVar,
-      body: SingleChildScrollView(
+    final pageBody = SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -181,7 +193,11 @@ class _MyHomePageState extends State<MyHomePage> {
               : txListWidget
           ],
         ),
-      ),
+      );
+
+    return Platform.isIOS ? CupertinoPageScaffold(child: pageBody, navigationBar: appBarVar,) : Scaffold(
+      appBar: appBarVar,
+      body: pageBody,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Platform.isIOS 
         ? Container() 
