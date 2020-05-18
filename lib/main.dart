@@ -126,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 MediaQuery.of(context).size.height 
                 - appBarVar.preferredSize.height                //---> this represents the space taken by the appBar !
                 - MediaQuery.of(context).padding.top           //----> this represents the space taken by the statusBar !
-              ) * 0.4,                                        //-----> finally responsiveness! 0.4 is ratio to 1, 40% !
+              ) * 0.3,                                        //-----> finally responsiveness! 0.4 is ratio to 1, 40% !
               child: Chart(_recentTransactions)
             ),
             Container(                                                   //===>> THE WHOLE SCREEN IS TAKEN INTO ACCOUNT NOW !
@@ -134,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 MediaQuery.of(context).size.height 
                 - appBarVar.preferredSize.height                                  //---> again this represents the space taken by the appBar !
                 - MediaQuery.of(context).padding.top                             //----> again this represents the space taken by the statusBar !
-              ) * 0.6,                                                          //-----> finally responsiveness! 0.6 is ratio to 1, 60% !
+              ) * 0.7,                                                          //-----> finally responsiveness! 0.6 is ratio to 1, 60% !
               child: TransactionList(_userTransactions, _deleteTransaction)
             ),
           ],
