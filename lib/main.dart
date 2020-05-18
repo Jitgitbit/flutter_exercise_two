@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -148,11 +150,14 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,       // IT'S A SPECIAL "IF INSIDE OF A LIST" SYNTAX IN DART !!!
               children: <Widget>[
                 Text('Show Chart'),
-                Switch(value: _showChart, onChanged: (val){
-                  setState(() {
-                    _showChart = val;
-                  });
-                }),
+                Switch.adaptive(
+                  activeColor: Theme.of(context).accentColor,
+                  value: _showChart, 
+                  onChanged: (val){
+                    setState(() {
+                      _showChart = val;
+                    });
+                  }),
               ],
             ),
             if(!isLandscape)Container(              //**               //===>> THE WHOLE SCREEN IS TAKEN INTO ACCOUNT NOW !
@@ -178,10 +183,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _startAddNewTransaction(context),
-      ),
+      floatingActionButton: Platform.isIOS 
+        ? Container() 
+        : FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () => _startAddNewTransaction(context),
+          ),
     );
   }
 }
