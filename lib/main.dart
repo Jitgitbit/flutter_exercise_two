@@ -8,11 +8,11 @@ import './widgets/new_transaction.dart';
 // import './widgets/user_transactions.dart';
 
 void main(){
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([                            //----> Forcing Portrait only !
-    DeviceOrientation.portraitUp, 
-    DeviceOrientation.portraitDown
-  ]);
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([                            //----> Forcing Portrait only !
+  //   DeviceOrientation.portraitUp, 
+  //   DeviceOrientation.portraitDown
+  // ]);
   runApp(MyApp());
 }
 
@@ -76,6 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // ),
   ];
 
+  bool _showChart = false;
+
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((tx) {                                     // .where is a DART specific method !
       return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7),));    // .isAfter is a DART specific method !
@@ -129,22 +131,34 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: (
-                MediaQuery.of(context).size.height 
-                - appBarVar.preferredSize.height                //---> this represents the space taken by the appBar !
-                - MediaQuery.of(context).padding.top           //----> this represents the space taken by the statusBar !
-              ) * 0.3,                                        //-----> finally responsiveness! 0.4 is ratio to 1, 40% !
-              child: Chart(_recentTransactions)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('Show Chart'),
+                Switch(value: _showChart, onChanged: (val){
+                  setState(() {
+                    _showChart = val;
+                  });
+                }),
+              ],
             ),
-            Container(                                                   //===>> THE WHOLE SCREEN IS TAKEN INTO ACCOUNT NOW !
-              height: (
-                MediaQuery.of(context).size.height 
-                - appBarVar.preferredSize.height                                  //---> again this represents the space taken by the appBar !
-                - MediaQuery.of(context).padding.top                             //----> again this represents the space taken by the statusBar !
-              ) * 0.7,                                                          //-----> finally responsiveness! 0.6 is ratio to 1, 60% !
-              child: TransactionList(_userTransactions, _deleteTransaction)
-            ),
+            _showChart
+              ? Container(
+                  height: (
+                    MediaQuery.of(context).size.height 
+                    - appBarVar.preferredSize.height                //---> this represents the space taken by the appBar !
+                    - MediaQuery.of(context).padding.top           //----> this represents the space taken by the statusBar !
+                  ) * 0.3,                                        //-----> finally responsiveness! 0.4 is ratio to 1, 40% !
+                  child: Chart(_recentTransactions)
+                )
+              : Container(                                                   //===>> THE WHOLE SCREEN IS TAKEN INTO ACCOUNT NOW !
+                  height: (
+                    MediaQuery.of(context).size.height 
+                    - appBarVar.preferredSize.height                                  //---> again this represents the space taken by the appBar !
+                    - MediaQuery.of(context).padding.top                             //----> again this represents the space taken by the statusBar !
+                  ) * 0.7,                                                          //-----> finally responsiveness! 0.6 is ratio to 1, 60% !
+                  child: TransactionList(_userTransactions, _deleteTransaction)
+                ),
           ],
         ),
       ),
