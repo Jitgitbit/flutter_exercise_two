@@ -12,3 +12,5 @@ intl: ^0.16.1
 don't forget the power of option-shift-F, formatting ! Problem with VS Code update version ! USE MOUSEPAD OPTIONS WAY !!!!
 
 open -a Simulator.app
+
+extract widget              --->  splitting up widgets within the file !! super handy !!
