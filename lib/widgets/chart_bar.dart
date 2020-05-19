@@ -5,8 +5,8 @@ class ChartBar extends StatelessWidget {
   final double spendingAmount;
   final double spendingPctOfTotal;
 
-  ChartBar(
-    this.label, 
+  const ChartBar(                 //-----> because this constructor doesn't need rebuilds, and all properties are finals, we can
+    this.label,                  // add const here as well, and thus improve performance, slightly !!
     this.spendingAmount, 
     this.spendingPctOfTotal
   );
