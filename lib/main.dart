@@ -141,18 +141,21 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         );
 
+    print("======>> Under here, what's the appBar height?");
     print(appBarVar.preferredSize.height);
+
+    final mediaQueryVar = MediaQuery.of(context);                       //======>> using a var like this will improve performance (less recalculating !)
 
     final txListWidget = Container(                                                   
                   height: (
-                    MediaQuery.of(context).size.height 
+                    mediaQueryVar.size.height 
                     - appBarVar.preferredSize.height                                  //---> this represents the space taken by the appBar !
-                    - MediaQuery.of(context).padding.top                             //----> this represents the space taken by the statusBar !
+                    - mediaQueryVar.padding.top                                      //----> this represents the space taken by the statusBar !
                   ) * 0.7,                                                          //-----> finally responsiveness! 0.7 is ratio to 1, 70% !
                   child: TransactionList(_userTransactions, _deleteTransaction)
                 );
 
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape = mediaQueryVar.orientation == Orientation.landscape;
 
     final pageBody = SafeArea(child: SingleChildScrollView(
         child: Column(
@@ -175,9 +178,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             if(!isLandscape)Container(              //**               //===>> THE WHOLE SCREEN IS TAKEN INTO ACCOUNT NOW !
                   height: (
-                    MediaQuery.of(context).size.height 
+                    mediaQueryVar.size.height 
                     - appBarVar.preferredSize.height                //---> again this represents the space taken by the appBar !
-                    - MediaQuery.of(context).padding.top           //----> again this represents the space taken by the statusBar !
+                    - mediaQueryVar.padding.top                    //----> again this represents the space taken by the statusBar !
                   ) * 0.3,                                        //-----> finally responsiveness! 0.3 is ratio to 1, 30% !
                   child: Chart(_recentTransactions)
                 ),
@@ -185,9 +188,9 @@ class _MyHomePageState extends State<MyHomePage> {
             if(isLandscape)_showChart                           //**
               ? Container(                                            //===>> THE WHOLE SCREEN IS TAKEN INTO ACCOUNT NOW !
                   height: (
-                    MediaQuery.of(context).size.height 
+                    mediaQueryVar.size.height 
                     - appBarVar.preferredSize.height                //---> again this represents the space taken by the appBar !
-                    - MediaQuery.of(context).padding.top           //----> again this represents the space taken by the statusBar !
+                    - mediaQueryVar.padding.top                    //----> again this represents the space taken by the statusBar !
                   ) * 0.7,                                        //-----> finally responsiveness! 0.7 is ratio to 1, 70% !
                   child: Chart(_recentTransactions)
                 )
