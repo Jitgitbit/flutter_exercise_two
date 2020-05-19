@@ -25,10 +25,8 @@ class MyApp extends StatelessWidget {
       title: 'Phoenix Expenses App',
       theme: ThemeData(
         primarySwatch: Colors.purple,
-        // accentColor: Colors.amber,
-        // accentColor: Color.fromRGBO(139, 0, 0, 1),
         accentColor: Colors.amber,
-        // errorColor: Colors.amber,
+        // errorColor: Color.fromRGBO(139, 0, 0, 1),
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(         
           title: TextStyle(
@@ -114,6 +112,34 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Widget _buildLandscapeContent(){
+    return Row(                             
+              mainAxisAlignment: MainAxisAlignment.center,       
+              children: <Widget>[
+                Text('Show Chart', style: Theme.of(context).textTheme.title,),
+                Switch.adaptive(
+                  activeColor: Theme.of(context).accentColor,
+                  value: _showChart, 
+                  onChanged: (val){
+                    setState(() {
+                      _showChart = val;
+                    });
+                  }),
+              ],
+            );
+  }
+
+  Widget _buildPortraitContent(MediaQueryData mediaQueryVar, AppBar appBarVar,){
+    return Container(                                        
+                  height: (
+                    mediaQueryVar.size.height 
+                    - appBarVar.preferredSize.height                //---> again this represents the space taken by the appBar !
+                    - mediaQueryVar.padding.top                    //----> again this represents the space taken by the statusBar !
+                  ) * 0.3,                                        //-----> finally responsiveness! 0.3 is ratio to 1, 30% !
+                  child: Chart(_recentTransactions)
+                );
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -162,30 +188,10 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            if(isLandscape)Row(                             //**  // !!! DO NOT USE {} AFTER THIS IF STATEMENT, check ** 
-              mainAxisAlignment: MainAxisAlignment.center,       // IT'S A SPECIAL "IF INSIDE OF A LIST" SYNTAX IN DART !!!
-              children: <Widget>[
-                Text('Show Chart', style: Theme.of(context).textTheme.title,),
-                Switch.adaptive(
-                  activeColor: Theme.of(context).accentColor,
-                  value: _showChart, 
-                  onChanged: (val){
-                    setState(() {
-                      _showChart = val;
-                    });
-                  }),
-              ],
-            ),
-            if(!isLandscape)Container(              //**               //===>> THE WHOLE SCREEN IS TAKEN INTO ACCOUNT NOW !
-                  height: (
-                    mediaQueryVar.size.height 
-                    - appBarVar.preferredSize.height                //---> again this represents the space taken by the appBar !
-                    - mediaQueryVar.padding.top                    //----> again this represents the space taken by the statusBar !
-                  ) * 0.3,                                        //-----> finally responsiveness! 0.3 is ratio to 1, 30% !
-                  child: Chart(_recentTransactions)
-                ),
-            if(!isLandscape)txListWidget,                        //**
-            if(isLandscape)_showChart                           //**
+            if(isLandscape)_buildLandscapeContent(),                           // !!! DO NOT USE {} AFTER THIS IF STATEMENT,
+            if(!isLandscape)_buildPortraitContent(mediaQueryVar, appBarVar),  // IT'S A SPECIAL "IF INSIDE OF A LIST" SYNTAX IN DART !!!
+            if(!isLandscape)txListWidget,                        
+            if(isLandscape)_showChart                           
               ? Container(                                            //===>> THE WHOLE SCREEN IS TAKEN INTO ACCOUNT NOW !
                   height: (
                     mediaQueryVar.size.height 
