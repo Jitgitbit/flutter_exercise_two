@@ -19,7 +19,7 @@ class TransactionList extends StatelessWidget {
                   'No transactions added yet!',
                   style: Theme.of(context).textTheme.title,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
                 Container(
@@ -61,12 +61,12 @@ class TransactionList extends StatelessWidget {
                     trailing: MediaQuery.of(context).size.width > 460
                       ? FlatButton.icon(
                           onPressed: () => deleteTx(transactions[index].id),
-                          icon: Icon(Icons.delete), 
+                          icon: const Icon(Icons.delete), 
                           textColor: Theme.of(context).errorColor,
-                          label: Text('Delete')
-                        )
+                          label: const Text('Delete')               // this widget does not need a rebuild ever, so we can add const and
+                        )                                          // that way slightly improve performance
                       : IconButton(
-                          icon: Icon(Icons.delete), 
+                          icon: const Icon(Icons.delete), 
                           color: Theme.of(context).errorColor,
                           onPressed: () => deleteTx(transactions[index].id),
                         ),
