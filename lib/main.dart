@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         // errorColor: Color.fromRGBO(139, 0, 0, 1),
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(         
-          title: TextStyle(
+          headline6: TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         ),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
-            title: TextStyle(
+            headline6: TextStyle(
               fontFamily: 'OpenSans',
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -116,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Row(                             
               mainAxisAlignment: MainAxisAlignment.center,       
               children: <Widget>[
-                Text('Show Chart', style: Theme.of(context).textTheme.title,),
+                Text('Show Chart', style: Theme.of(context).textTheme.headline6,),
                 Switch.adaptive(
                   activeColor: Theme.of(context).accentColor,
                   value: _showChart, 
